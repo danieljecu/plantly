@@ -1,13 +1,16 @@
-import { View, Text, StyleSheet, ScrollView, TextInput, Alert} from "react-native";
+import { View, Text, StyleSheet, ScrollView, TextInput, Alert, Touchable, TouchableOpacity} from "react-native";
 import { theme } from "@/theme";
 import { useState } from "react";
 import {PlantlyButton} from "@/components/PlantlyButton";
 import { PlantlyImage } from "@/components/PlantlyImage";
+import { usePlantStore } from "@/store/plantsStore";
 
 
 export default function NewScreen() {
     const [name, setName] = useState("");
     const [days, setDays] = useState(7);
+
+    const addPlant = usePlantStore(state=>state.addPlant);
 
     const handleSubmit = ()=>{
         if(!name){
@@ -21,12 +24,17 @@ export default function NewScreen() {
             Alert.alert("Validation Error", `Wattering Frequency must to be a number?`)
         }
         console.log("Adding plant", name, days);
+      addPlant(name, days)
 
     }
- 
+    // const handleChooseImage = async ()=>{
+
+    // }
   return (
     <ScrollView  style={styles.container}>
-      <PlantlyImage style={styles.centered}/>
+      <TouchableOpacity style={styles.centered} activeOpacity={0.8}> 
+             <PlantlyImage />
+      </TouchableOpacity>
 
       <View style={styles.centered}>
         <Text>Name</Text>

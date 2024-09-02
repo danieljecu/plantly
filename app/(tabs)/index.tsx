@@ -1,17 +1,35 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Pressable } from 'react-native';
+import { StyleSheet, Text, View, Pressable, FlatList } from 'react-native';
 import { theme, Colors } from "@/theme";
-import MyCheckbox from "@/components/MyCheckbox";
+import {MyCheckbox} from "@/components/MyCheckbox";
+import { usePlantStore } from '@/store/plantsStore';
+import { PlantCard } from '@/components/PlantCard';
+import { PlantlyButton } from '@/components/PlantlyButton';
+import { useRouter } from 'expo-router';
 
 
 export default function App() {
+  const router= useRouter()
+  const plants = usePlantStore(state=> state.plants)
+
+  console.log(plants)
   return (
     <View style={styles.appContainer}>
-      <Text style={styles.appTitle}>Checkbox Example</Text>
+      <Text style={styles.appTitle}>Example</Text>
       <View style={styles.checkboxContainer}>
-        {/*<MyCheckbox />*/}
+        <MyCheckbox />
         <Text style={styles.checkboxLabel}>{`⬅️ Click!`}</Text>
       </View>
+      <FlatList data={plants}
+        style={styles.contentContainer}
+        contentContainerStyle={styles.contentContainer}
+        renderItem={(item)=>
+          <PlantCard plant={item}/>
+        }
+        ListEmptyComponent={<PlantlyButton title="Add your first plant" onPress={()=>router.navigate("/new")}/>} 
+        />
+
+      
     </View>
   );
 }
@@ -22,6 +40,14 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  container:{
+    flex: 1,
+    backgroundColor: theme.colorWhite
+  },
+  contentContainer:{
+    flex:1,
+    padding:12
   },
   appTitle: {
     marginVertical: 16,
