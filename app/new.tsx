@@ -1,14 +1,19 @@
-import { View, Text, StyleSheet, ScrollView, TextInput, Alert, Touchable, TouchableOpacity} from "react-native";
+import { View, Text, StyleSheet, ScrollView, TextInput, Alert, Touchable, TouchableOpacity, Platform} from "react-native";
 import { theme } from "@/theme";
 import { useState } from "react";
 import {PlantlyButton} from "@/components/PlantlyButton";
 import { PlantlyImage } from "@/components/PlantlyImage";
 import { usePlantStore } from "@/store/plantsStore";
+import * as ImagePicker from "expo-image-picker";
+import { useRouter } from "expo-router";
 
 
 export default function NewScreen() {
-    const [name, setName] = useState("");
+  const [imageUri, setImageUri] = useState<string>("");  
+  const [name, setName] = useState("");
     const [days, setDays] = useState(7);
+    const router = useRouter()
+
 
     const addPlant = usePlantStore(state=>state.addPlant);
 
@@ -24,16 +29,30 @@ export default function NewScreen() {
             Alert.alert("Validation Error", `Wattering Frequency must to be a number?`)
         }
         console.log("Adding plant", name, days);
-      addPlant(name, days)
+      addPlant(name, Number(days), imageUri);
+      router.navigate("/")
 
     }
-    // const handleChooseImage = async ()=>{
+    const handleChooseImage = async ()=>{
+      if(Platform.OS==="web"){
+        return;
+      }
+      const result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        allowsEditing: true,
+        aspect: [1,1],
+        quality: 1
+      })
 
-    // }
+      if(!result.canceled ){
+        setImageUri(result.assets[0].uri)
+      }
+
+    }
   return (
     <ScrollView  style={styles.container}>
-      <TouchableOpacity style={styles.centered} activeOpacity={0.8}> 
-             <PlantlyImage />
+      <TouchableOpacity style={styles.centered} activeOpacity={0.8} onPress={handleChooseImage}> 
+             <PlantlyImage imageUri={imageUri}  />
       </TouchableOpacity>
 
       <View style={styles.centered}>
@@ -62,5 +81,5 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colorWhite,
   },
   contentContainer:{paddingTop: 24, paddingHorizontal: 24},
-  centered: {alignItems: "center",}
+  centered: {alignItems: "center",marginBottom:24 }
 });

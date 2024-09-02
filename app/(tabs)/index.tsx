@@ -23,7 +23,7 @@ export default function App() {
       <FlatList data={plants}
         style={styles.contentContainer}
         contentContainerStyle={styles.contentContainer}
-        renderItem={(item)=>
+        renderItem={({item})=>
           <PlantCard plant={item}/>
         }
         ListEmptyComponent={<PlantlyButton title="Add your first plant" onPress={()=>router.navigate("/new")}/>} 
