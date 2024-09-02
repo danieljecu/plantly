@@ -38,6 +38,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: theme.colorWhite,
+    paddingHorizontal: 8
   },
   heading: {
     fontSize: 42,
