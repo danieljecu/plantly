@@ -21,7 +21,7 @@ export const useUserStore = create<UserState>(
     }),
     {
       name: "plantly-user-store",
-      storage: createJSONStorage(() => AsyncStorage)
+      storage: createJSONStorage(() => AsyncStorage),
     },
   ),
 );

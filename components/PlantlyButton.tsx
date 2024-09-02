@@ -4,7 +4,7 @@ import * as Haptics from "expo-haptics";
 import { theme } from "@/theme";
 
 type Props = {
-  title: string; onPress:()=>void;
+  title: string; onPress:() => void;
 };
 export const PlantlyButton = ({ title, onPress }: Props) => {
   const handlePress = () => {
