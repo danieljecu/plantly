@@ -1,6 +1,9 @@
 export const theme = {
   colorGreen: "#29b365",
   colorWhite: "#fff",
+  colorLeafyGreen: "#206a42",
+  colorAppleGreen: "#a0d36c",
+  colorLimeGreen: "#d0e57e",
 };
 
 export const Colors = {
@@ -33,4 +36,4 @@ export const Colors = {
   permissionColor: "#84329B",
 } as const;
 
-export type Colors = (typeof Colors)[keyof typeof Colors];
+export type ColorsType = (typeof Colors)[keyof typeof Colors];

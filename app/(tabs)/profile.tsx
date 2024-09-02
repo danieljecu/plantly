@@ -6,7 +6,7 @@ export default function ProfileScreen() {
   const toggleHasOnboarded = useUserStore((store) => store.toggleHasOnboarded);
   return (
     <View style={styles.container}>
-      <Button title={"Back to onboarding"} onPress={toggleHasOnboarded}/>
+      <Button title={"Back to onboarding"} onPress={toggleHasOnboarded} />
       <Text style={styles.text}>Profile</Text>
     </View>
   );
