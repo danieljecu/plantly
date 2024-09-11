@@ -5,6 +5,7 @@ import { usePlantStore } from '@/store/plantsStore';
 import { PlantCard } from '@/components/PlantCard';
 import { PlantlyButton } from '@/components/PlantlyButton';
 import { useRouter } from 'expo-router';
+import { MyCheckbox } from '@/components/MyCheckbox';
 
 
 export default function App() {
@@ -15,7 +16,11 @@ export default function App() {
     <View style={styles.appContainer}>
       <Text style={styles.appTitle}>Example</Text>
       <View style={styles.checkboxContainer}>
-
+        <MyCheckbox style={{
+            marginRight: 10,
+            height: 48,
+            width: 48
+          }}/>
         <Text style={styles.checkboxLabel}>{`⬅️ Click!`}</Text>
       </View>
       <FlatList data={plants}

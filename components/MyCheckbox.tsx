@@ -103,14 +103,25 @@ const CheckBox = ({ defaultValue, touchableProps, style, title, accessibilityHin
 
 import { Ionicons } from '@expo/vector-icons';
 
-export function MyCheckbox({accessibilityHintAction}) {
-  const [checked, setChecked] = useState(false);
+export function MyCheckbox({
+  defaultValue = false,
+  onChange,
+  accessibilityHintAction
+}) {
+  const [isSelected, setSelection] = useState<boolean>(!!defaultValue);
+
+  const onPress = (): void => {
+    // touchableProps &&
+    //   touchableProps.onPress &&
+    //   touchableProps.onPress(!isSelected);
+    setSelection((prev) => !prev);
+  };
   return (
     <Pressable
-      style={[styles.checkboxBase, checked && styles.checkboxChecked]}
-      onPress={() => setChecked(!checked)}
+      style={[styles.checkboxBase, isSelected && styles.checkboxChecked]}
+      onPress={onPress}
     >
-      {checked && <Ionicons name="checkmark" size={24} color="white" />}
+      {isSelected && <Ionicons name="checkmark" size={24} color="white" />}
     </Pressable>
   );
 }
