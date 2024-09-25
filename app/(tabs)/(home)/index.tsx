@@ -6,15 +6,19 @@ import { PlantCard } from '@/components/PlantCard';
 import { PlantlyButton } from '@/components/PlantlyButton';
 import { useRouter } from 'expo-router';
 import { MyCheckbox } from '@/components/MyCheckbox';
+import { useLanguage } from '@/locales';
+
 
 
 export default function App() {
   const router= useRouter()
   const plants = usePlantStore(state=> state.plants)
+  const {t} = useLanguage()
 
   return (
+
     <View style={styles.appContainer}>
-      <Text style={styles.appTitle}>Example</Text>
+      <Text style={styles.appTitle}>{t("welcome")} User</Text>
       <View style={styles.checkboxContainer}>
         <MyCheckbox style={{
             marginRight: 10,

@@ -1,8 +1,9 @@
+import { LanguageProvider } from "@/locales";
 import { Stack } from "expo-router";
-
 
 export default function Layout() {
   return (
+    <LanguageProvider>
     <Stack>
       <Stack.Screen
         name="(tabs)"
@@ -20,5 +21,6 @@ export default function Layout() {
         options={{presentation:"modal", title:"New plant"}}
         />
     </Stack>
+    </LanguageProvider>
   );
 }
